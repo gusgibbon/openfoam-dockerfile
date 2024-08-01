@@ -24,7 +24,7 @@ RUN sed -i "s/[ #]\(.*StrictHostKeyChecking \).*/ \1no/g" /etc/ssh/ssh_config \
     && sed -i "s/#\(StrictModes \).*/\1no/g" /etc/ssh/sshd_config \
     && sed -i "s/#\(Port \).*/\1$port/g" /etc/ssh/sshd_config
 
-RUN useradd -m mpiuser
+RUN useradd -s /bin/bash -m mpiuser 
 WORKDIR /home/mpiuser
 # Configurations for running sshd as non-root.
 COPY --chown=mpiuser sshd_config .sshd_config
@@ -40,3 +40,5 @@ RUN apt update -y && \
     add-apt-repository "http://dl.openfoam.org/ubuntu dev" && \
     apt update -y && \
     apt install -y --no-install-recommends openfoam-dev
+
+RUN echo "source /opt/openfoam-dev/etc/bashrc" >> /home/mpiuser/.bashrc
