@@ -39,7 +39,7 @@ RUN apt update -y && \
     curl -o /etc/apt/trusted.gpg.d/openfoam.asc https://dl.openfoam.org/gpg.key && \
     add-apt-repository "http://dl.openfoam.org/ubuntu dev" && \
     apt update -y && \
-    apt install -y --no-install-recommends sed rsync git-lfs git openfoam-dev
+    apt install -y --no-install-recommends lockfile-progs sed rsync git-lfs git openfoam-dev
 
 RUN echo "source /opt/openfoam-dev/etc/bashrc" >> /home/mpiuser/.bashrc
 
